@@ -12,7 +12,40 @@ required_field_patterns := {
 	"service_name": ["service name", "service_name", "servicename", "service", "application name", "app name"],
 }
 
-violation[{"remarks": remarks}] if {
+risk_templates := [{
+  "name": "Change request missing required custom fields",
+  "title": "Incomplete Change Request Fields Undermine Change Traceability and Release Governance",
+  "statement": "Change requests missing required fields such as Release URL, Deployment ID, or Service Name cannot be fully traced to their associated deployment, cannot be linked to the impacted service, and cannot be verified as successfully deployed. These fields are essential for post-change verification, incident correlation, and regulatory audit of production changes.",
+  "likelihood_hint": "moderate",
+  "impact_hint": "high",
+  "threat_refs": [
+    {
+      "system": "https://cwe.mitre.org",
+      "external_id": "CWE-1059",
+      "title": "Incomplete Documentation",
+      "url": "https://cwe.mitre.org/data/definitions/1059.html"
+    },
+    {
+      "system": "https://cwe.mitre.org",
+      "external_id": "CWE-693",
+      "title": "Protection Mechanism Failure",
+      "url": "https://cwe.mitre.org/data/definitions/693.html"
+    }
+  ],
+  "remediation": {
+    "title": "Populate all required fields on change request issues",
+    "description": "Ensure all change requests have Release URL, Deployment ID, and Service Name fields populated. Make these fields required in the Jira issue type screen configuration and automate population from the deployment pipeline where possible.",
+    "tasks": [
+      { "title": "Identify all change requests missing any of the required fields and populate them" },
+      { "title": "Configure Release URL, Deployment ID, and Service Name as required fields on the Change Request screen in Jira" },
+      { "title": "Integrate the CI/CD pipeline to automatically populate Deployment ID and Release URL fields on issue transition" },
+      { "title": "Add a Jira automation rule that blocks transition to 'Done' if any required field is empty" },
+      { "title": "Document the expected field names and format in the team's working agreement or project README" }
+    ]
+  }
+}]
+
+violation[{"id": "missing_required_field", "remarks": remarks}] if {
 	project := input.projects[_]
 	issue := project.issues[_]
 	is_change_request(issue)
