@@ -3,3 +3,6 @@ lisa-design:
 - Manifest seeded at 0.2.0 = releases/latest (v0.2.0, final, commit d7ca2bf is an ancestor of main), so no bootstrap-sha. No version.txt added; release-please adds it in the first release PR.
 - ci.yml already pinned v1.5.2 with release-checks (W2), so it is unchanged.
 - release.yml keeps opa-version 1.14.1 (the agent's OPA) and directory: policies, so the bundle stays built from policies/ only.
+
+lisa-selfreview:
+- Pass 1 (packs core, rego-policy): no findings. Checked CORE-CI-001 (all callers pin the shared workflow by SHA, top-level permissions set, no checkout in callers), CORE-SIZE-001 (131+/40-), CORE-VERIFY-001 (actionlint v1.7.12 clean; OPA 1.14.1 check/test 19/19/build OK). Not a finding, for a human: the GitHub release no longer carries bundle.tar.gz (shared workflow attaches nothing); the agent pulls from OCI.
