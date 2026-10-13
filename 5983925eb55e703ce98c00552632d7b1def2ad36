@@ -1,0 +1,5 @@
+lisa-design:
+- Shared CI pinned to compliance-framework/workflows v1.5.2 (6e7fc9c) in all three uses: lines; ci.yml is mock-plugin-policies-1's caller with only the pins changed.
+- push.yaml and test.yml removed: they only ran opa test/check on OPA 1.6.0, now covered by ci-policies.yml; release.yml and build-and-upload.yml untouched (W3 replaces them).
+- Rego changes are pure opa fmt 1.14.1 output; no Regal ignores needed (0 Regal errors, no data.json/data.yaml in policies/). The 28 Regal warnings are left as they are by decision (fix errors only).
+- Behaviour proven identical: opa eval of data.compliance_framework (time.now_ns frozen) on main vs branch over 12 inputs gives byte-identical JSON.
