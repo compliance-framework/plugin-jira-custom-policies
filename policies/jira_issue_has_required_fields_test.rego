@@ -101,9 +101,7 @@ test_violation_when_missing_service_name if {
 test_violation_when_missing_all_fields if {
 	inp := {"projects": [{"project": {"id": "1", "key": "TEST", "name": "Test"}, "issues": [{
 		"key": "CR-123",
-		"fields": {
-			"issuetype": {"name": "Change Request"},
-		},
+		"fields": {"issuetype": {"name": "Change Request"}},
 		"fields_with_metadata": [],
 		"changelog": null,
 		"approvals": [],
@@ -157,9 +155,7 @@ test_pass_when_all_fields_present if {
 test_pass_when_non_change_request if {
 	inp := {"projects": [{"project": {"id": "1", "key": "TEST", "name": "Test"}, "issues": [{
 		"key": "BUG-123",
-		"fields": {
-			"issuetype": {"name": "Bug"},
-		},
+		"fields": {"issuetype": {"name": "Bug"}},
 		"fields_with_metadata": [],
 		"changelog": null,
 		"approvals": [],

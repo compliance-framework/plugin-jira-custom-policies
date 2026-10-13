@@ -11,36 +11,36 @@ grace_period_seconds := 1209600
 pr_field_patterns := ["pull request", "pr", "pull_request", "pullrequest", "merge request", "mr"]
 
 risk_templates := [{
-  "name": "Change request has no linked pull request",
-  "title": "Unlinked PRs Break Traceability Between Code Changes and Approved Changes",
-  "statement": "A change request without a linked pull request cannot be verified to correspond to actual code changes that went through code review. Without this link, it is impossible to confirm that the code merged to production matches the approved change scope, that the code was peer-reviewed, or that security scanning passed. This breaks the end-to-end audit trail from issue approval to code delivery. A two-week grace period is allowed after creation.",
-  "likelihood_hint": "moderate",
-  "impact_hint": "high",
-  "threat_refs": [
-    {
-      "system": "https://cwe.mitre.org",
-      "external_id": "CWE-1059",
-      "title": "Incomplete Documentation",
-      "url": "https://cwe.mitre.org/data/definitions/1059.html"
-    },
-    {
-      "system": "https://cwe.mitre.org",
-      "external_id": "CWE-693",
-      "title": "Protection Mechanism Failure",
-      "url": "https://cwe.mitre.org/data/definitions/693.html"
-    }
-  ],
-  "remediation": {
-    "title": "Link pull requests to all change request issues",
-    "description": "Ensure every change request has at least one linked pull request to maintain traceability between approved changes and the actual code delivered. Automate this link via branch naming conventions or PR title patterns.",
-    "tasks": [
-      { "title": "Identify all change requests older than 2 weeks without a linked PR and add the missing link" },
-      { "title": "Enforce a branch naming or PR title convention that includes the Jira issue key (e.g., CR-123)" },
-      { "title": "Enable the Jira GitHub/Bitbucket integration to automatically link PRs mentioning the issue key" },
-      { "title": "Add a workflow validator or Jira automation that flags CRs transitioning to 'Done' without a PR link" },
-      { "title": "Configure PR templates to prompt developers to include the Jira issue key" }
-    ]
-  }
+	"name": "Change request has no linked pull request",
+	"title": "Unlinked PRs Break Traceability Between Code Changes and Approved Changes",
+	"statement": "A change request without a linked pull request cannot be verified to correspond to actual code changes that went through code review. Without this link, it is impossible to confirm that the code merged to production matches the approved change scope, that the code was peer-reviewed, or that security scanning passed. This breaks the end-to-end audit trail from issue approval to code delivery. A two-week grace period is allowed after creation.",
+	"likelihood_hint": "moderate",
+	"impact_hint": "high",
+	"threat_refs": [
+		{
+			"system": "https://cwe.mitre.org",
+			"external_id": "CWE-1059",
+			"title": "Incomplete Documentation",
+			"url": "https://cwe.mitre.org/data/definitions/1059.html",
+		},
+		{
+			"system": "https://cwe.mitre.org",
+			"external_id": "CWE-693",
+			"title": "Protection Mechanism Failure",
+			"url": "https://cwe.mitre.org/data/definitions/693.html",
+		},
+	],
+	"remediation": {
+		"title": "Link pull requests to all change request issues",
+		"description": "Ensure every change request has at least one linked pull request to maintain traceability between approved changes and the actual code delivered. Automate this link via branch naming conventions or PR title patterns.",
+		"tasks": [
+			{"title": "Identify all change requests older than 2 weeks without a linked PR and add the missing link"},
+			{"title": "Enforce a branch naming or PR title convention that includes the Jira issue key (e.g., CR-123)"},
+			{"title": "Enable the Jira GitHub/Bitbucket integration to automatically link PRs mentioning the issue key"},
+			{"title": "Add a workflow validator or Jira automation that flags CRs transitioning to 'Done' without a PR link"},
+			{"title": "Configure PR templates to prompt developers to include the Jira issue key"},
+		],
+	},
 }]
 
 violation[{"id": "missing_linked_pr", "remarks": remarks}] if {
