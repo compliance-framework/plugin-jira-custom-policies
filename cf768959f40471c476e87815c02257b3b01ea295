@@ -1,0 +1,5 @@
+lisa-design:
+- Callers and release-please-config.json are copied verbatim from mock-plugin-policies-1 with pins moved to workflows v1.5.2 (6e7fc9c); they match the reviewed plugin-file-attestation-policies#4 byte for byte. Config keys equal release-please/defaults.json at v1.5.2 (no drift).
+- Manifest seeded at 0.2.0 = releases/latest (v0.2.0, final, commit d7ca2bf is an ancestor of main), so no bootstrap-sha. No version.txt added; release-please adds it in the first release PR.
+- ci.yml already pinned v1.5.2 with release-checks (W2), so it is unchanged.
+- release.yml keeps opa-version 1.14.1 (the agent's OPA) and directory: policies, so the bundle stays built from policies/ only.
