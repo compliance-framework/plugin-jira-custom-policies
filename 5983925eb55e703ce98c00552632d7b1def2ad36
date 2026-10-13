@@ -3,3 +3,7 @@ lisa-design:
 - push.yaml and test.yml removed: they only ran opa test/check on OPA 1.6.0, now covered by ci-policies.yml; release.yml and build-and-upload.yml untouched (W3 replaces them).
 - Rego changes are pure opa fmt 1.14.1 output; no Regal ignores needed (0 Regal errors, no data.json/data.yaml in policies/). The 28 Regal warnings are left as they are by decision (fix errors only).
 - Behaviour proven identical: opa eval of data.compliance_framework (time.now_ns frozen) on main vs branch over 12 inputs gives byte-identical JSON.
+
+lisa-selfreview:
+- pass 1 (rules: core, rego-policy): verdict approve, no findings introduced by this diff. Workflow pins are full SHAs with permissions: {} at the top level; Rego changes are opa fmt output only (git diff -w: 20+/24-, trailing commas and indentation); opa fmt/check --strict/test (19/19)/build, Regal (0 errors) and actionlint v1.7.12 pass locally.
+- Pre-existing, out of scope (listed in the PR body, not fixed): no # METADATA blocks; risk_templates lack violation_ids and use likelihood_hint "moderate"; tests live in <pkg>_test packages; Makefile test target runs `OPA` (capitalised) instead of opa; README does not list the policies.
